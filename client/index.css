@@ -811,3 +811,55 @@ button.prompt-tag span {
 .agent-action-type-message {
 	color: var(--tl-color-text-1);
 }
+
+.tl-theme__dark {
+	/* Canvas */
+	--tl-color-snap: hsl(0, 76%, 60%);
+	--tl-color-selection-fill: hsl(209, 100%, 57%, 20%);
+	--tl-color-selection-stroke: hsl(214, 84%, 56%);
+	--tl-color-background: hsl(240, 5%, 6.5%);
+	--tl-color-brush-fill: hsl(0, 0%, 71%, 5.1%);
+	--tl-color-brush-stroke: hsl(0, 0%, 71%, 25.1%);
+	--tl-color-grid: hsl(0, 0%, 40%);
+	/* UI */
+	--tl-color-low: hsl(260, 4.5%, 10.5%);
+	--tl-color-low-border: hsl(207, 10%, 10%);
+	--tl-color-culled: hsl(210, 11%, 19%);
+	--tl-color-muted-none: hsl(0, 0%, 100%, 0%);
+	--tl-color-muted-0: hsl(0, 0%, 100%, 2%);
+	--tl-color-muted-1: hsl(0, 0%, 100%, 10%);
+	--tl-color-muted-2: hsl(0, 0%, 100%, 5%);
+	--tl-color-hint: hsl(0, 0%, 100%, 7%);
+	--tl-color-overlay: hsl(0, 0%, 0%, 50%);
+	--tl-color-divider: hsl(240, 9%, 22%);
+	--tl-color-panel: hsl(235, 6.8%, 13.5%);
+	--tl-color-panel-contrast: hsl(245, 12%, 23%);
+	--tl-color-panel-overlay: hsl(210, 10%, 24%, 82%);
+	--tl-color-panel-transparent: hsla(235, 6.8%, 13.5%, 0%);
+	--tl-color-selected: hsl(217, 89%, 61%);
+	--tl-color-selected-contrast: hsl(0, 0%, 100%);
+	--tl-color-focus: hsl(217, 76%, 80%);
+	--tl-color-tooltip: hsla(0, 0%, 100%, 1);
+	/* Text */
+	--tl-color-text: hsl(210, 17%, 98%);
+	--tl-color-text-0: hsl(0, 9%, 94%);
+	--tl-color-text-1: hsl(0, 0%, 85%);
+	--tl-color-text-3: hsl(204, 4%, 75%);
+	--tl-color-text-shadow: hsl(210, 13%, 18%);
+	--tl-color-text-highlight: hsl(52, 100%, 41%);
+	--tl-color-text-highlight-p3: color(display-p3 0.8078 0.6225 0.0312);
+	/* Named */
+	--tl-color-primary: hsl(214, 84%, 56%);
+	--tl-color-success: hsl(123, 38%, 57%);
+	--tl-color-info: hsl(199, 92%, 56%);
+	--tl-color-warning: hsl(36, 100%, 57%);
+	--tl-color-danger: hsl(0, 82%, 66%);
+	--tl-color-laser: hsl(0, 100%, 50%);
+	/* Shadows */
+	--tl-shadow-1: 0px 1px 2px hsl(0, 0%, 0%, 16.1%), 0px 1px 3px hsl(0, 0%, 0%, 22%),
+		inset 0px 0px 0px 1px var(--tl-color-panel-contrast);
+	--tl-shadow-2: 0px 1px 3px hsl(0, 0%, 0%, 66.6%), 0px 2px 6px hsl(0, 0%, 0%, 33%),
+		inset 0px 0px 0px 1px var(--tl-color-panel-contrast);
+	--tl-shadow-3: 0px 1px 3px hsl(0, 0%, 0%, 50%), 0px 2px 12px hsl(0, 0%, 0%, 50%),
+		inset 0px 0px 0px 1px var(--tl-color-panel-contrast);
+}
