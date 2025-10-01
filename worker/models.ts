@@ -56,11 +56,11 @@ export const AGENT_MODEL_DEFINITIONS = {
 	// },
 
 	// Not recommended
-	// 'gpt-5': {
-	// 	name: 'gpt-5',
-	// 	id: 'gpt-5-2025-08-07',
-	// 	provider: 'openai',
-	// },
+	'gpt-5': {
+		name: 'gpt-5',
+		id: 'gpt-5-2025-08-07',
+		provider: 'openai',
+	},
 
 	// Mildly recommended
 	// 'gpt-4.1': {
@@ -70,9 +70,9 @@ export const AGENT_MODEL_DEFINITIONS = {
 	// },
 
 	// Mildly recommended
-	// 'gpt-4o': {
-	// 	name: 'gpt-4o',
-	// 	id: 'gpt-4o',
-	// 	provider: 'openai',
-	// },
+	'gpt-4o': {
+		name: 'gpt-4o',
+		id: 'gpt-4o',
+		provider: 'openai',
+	},
 } as const
