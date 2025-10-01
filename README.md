@@ -1,5 +1,10 @@
 # tldraw agent
 
+```
+npx wrangler deploy
+npx wrangler secret put ANTHROPIC_API_KEY
+```
+
 This starter kit demonstrates how to build an AI agent that can manipulate the [tldraw](https://github.com/tldraw/tldraw) canvas.
 
 It features a chat panel on the right-hand-side of the screen where the user can communicate with the agent, add context and see chat history.

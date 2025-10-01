@@ -813,7 +813,7 @@ async function* streamAgent({
 	prompt: BaseAgentPrompt
 	signal: AbortSignal
 }): AsyncGenerator<Streaming<AgentAction>> {
-	const res = await fetch('/stream', {
+	const res = await fetch('https://tldraw-agent-worker.sublime-07a.workers.dev/stream', {
 		method: 'POST',
 		body: JSON.stringify(prompt),
 		headers: {
