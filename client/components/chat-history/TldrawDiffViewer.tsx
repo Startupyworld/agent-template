@@ -1,13 +1,39 @@
-import { forwardRef, useMemo } from 'react'
-import {
-	DefaultShapeWrapper,
-	RecordsDiff,
-	TLRecord,
-	TLShape,
-	TLShapeId,
-	TLShapeWrapperProps,
-} from 'tldraw'
+import { forwardRef, ReactNode, useMemo } from 'react'
+import { RecordsDiff, TLRecord, TLShape, TLShapeId } from 'tldraw'
 import { TldrawViewer } from './TldrawViewer'
+import classNames from 'classnames'
+
+/** @public */
+export interface TLShapeWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
+	/** The shape being rendered. */
+	shape: TLShape
+	/** Whether this is the shapes regular, or background component. */
+	isBackground: boolean
+	/** The shape's rendered component. */
+	children: ReactNode
+}
+
+/** @public @react */
+export const DefaultShapeWrapper = forwardRef(function DefaultShapeWrapper(
+	{ children, shape, isBackground, ...props }: TLShapeWrapperProps,
+	ref: React.Ref<HTMLDivElement>
+) {
+	const isFilledShape = 'fill' in shape.props && shape.props.fill !== 'none'
+
+	return (
+		<div
+			ref={ref}
+			data-shape-type={shape.type}
+			data-shape-is-filled={isBackground ? undefined : isFilledShape}
+			data-shape-id={shape.id}
+			draggable={false}
+			{...props}
+			className={classNames('tl-shape', isBackground && 'tl-shape-background', props.className)}
+		>
+			{children}
+		</div>
+	)
+})
 
 export function TldrawDiffViewer({ diff }: { diff: RecordsDiff<TLRecord> }) {
 	const diffShapes = useMemo(() => getDiffShapesFromDiff(diff), [diff])
