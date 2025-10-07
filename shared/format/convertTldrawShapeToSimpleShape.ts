@@ -24,9 +24,11 @@ import {
 	SimpleLineShape,
 	SimpleNoteShape,
 	SimpleShape,
+	SimpleSublimeCardShape,
 	SimpleTextShape,
 	SimpleUnknownShape,
 } from './SimpleShape'
+import { ISublimeCardShape } from '~/routes/_app.canvas.$canvasSlug/canvas-util/card-shape'
 
 /**
  * Convert a tldraw shape to a simple shape
@@ -45,6 +47,8 @@ export function convertTldrawShapeToSimpleShape(editor: Editor, shape: TLShape):
 			return convertNoteShapeToSimple(editor, shape as TLNoteShape)
 		case 'draw':
 			return convertDrawShapeToSimple(editor, shape as TLDrawShape)
+		case 'sublime-card':
+			return convertSublimeCardShapeToSimple(editor, shape as ISublimeCardShape)
 		default:
 			return convertUnknownShapeToSimple(editor, shape)
 	}
@@ -61,6 +65,7 @@ export function convertTldrawShapeToSimpleType(shape: TLShape): SimpleShape['_ty
 		case 'arrow':
 		case 'note':
 		case 'draw':
+		case 'sublime-card':
 			return shape.type
 		default:
 			return 'unknown'
@@ -240,6 +245,27 @@ function convertUnknownShapeToSimple(editor: Editor, shape: TLShape): SimpleUnkn
 		subType: shape.type,
 		x: bounds.x,
 		y: bounds.y,
+	}
+}
+
+function convertSublimeCardShapeToSimple(
+	editor: Editor,
+	shape: ISublimeCardShape
+): SimpleSublimeCardShape {
+	if (!shape.props.card) {
+		throw new Error('Sublime card shape has no card')
+	}
+
+	return {
+		_type: 'sublime-card',
+		note: (shape.meta.note as string) ?? '',
+		shapeId: convertTldrawIdToSimpleId(shape.id),
+
+		cardId: shape.props.card.slug,
+		cardType: shape.props.card.entityType,
+		cardText: shape.props.card.textContent ?? '',
+		x: shape.x,
+		y: shape.y,
 	}
 }
 

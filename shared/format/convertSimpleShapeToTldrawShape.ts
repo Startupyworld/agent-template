@@ -30,9 +30,29 @@ import {
 	SimpleLineShape,
 	SimpleNoteShape,
 	SimpleShape,
+	SimpleSublimeCardShape,
 	SimpleTextShape,
 	SimpleUnknownShape,
 } from './SimpleShape'
+
+/**
+ * Interface for Sublime Card shape
+ */
+type ISublimeCardShape = TLShape & {
+	type: 'sublime-card'
+	props: {
+		card: {
+			slug: string
+			entityType: string
+			textContent?: string
+		}
+		[key: string]: unknown
+	}
+	meta: {
+		note?: string
+		[key: string]: unknown
+	}
+}
 
 /**
  * Convert a SimpleShape to a shape object to a tldraw shape using defaultShape for fallback values
@@ -83,6 +103,9 @@ export function convertSimpleShapeToTldrawShape(
 		}
 		case 'draw': {
 			return convertDrawShapeToTldrawShape(editor, simpleShape, { defaultShape })
+		}
+		case 'sublime-card': {
+			return convertSublimeCardShapeToTldrawShape(editor, simpleShape, { defaultShape })
 		}
 		case 'unknown': {
 			return convertUnknownShapeToTldrawShape(editor, simpleShape, { defaultShape })
@@ -155,7 +178,7 @@ function convertTextShapeToTldrawShape(
 	}
 
 	const autoSize =
-		simpleShape.wrap === undefined ? (defaultTextShape.props?.autoSize ?? true) : !simpleShape.wrap
+		simpleShape.wrap === undefined ? defaultTextShape.props?.autoSize ?? true : !simpleShape.wrap
 	const textFontSize = FONT_SIZES[textSize]
 	const textAlign = simpleShape.textAlign ?? defaultTextShape.props?.textAlign ?? 'start'
 	const font = defaultTextShape.props?.font ?? 'draw'
@@ -540,6 +563,37 @@ function convertDrawShapeToTldrawShape(
 				note: simpleShape.note ?? defaultDrawShape.meta?.note ?? '',
 			},
 		},
+	}
+}
+
+function convertSublimeCardShapeToTldrawShape(
+	editor: Editor,
+	simpleShape: SimpleSublimeCardShape,
+	{ defaultShape }: { defaultShape: Partial<TLShape> }
+): { shape: TLShape } {
+	const shapeId = convertSimpleIdToTldrawId(simpleShape.shapeId)
+	const defaultSublimeCardShape = defaultShape as ISublimeCardShape
+
+	return {
+		shape: {
+			id: shapeId,
+			type: 'sublime-card',
+			typeName: 'shape',
+			x: simpleShape.x ?? defaultSublimeCardShape.x ?? 0,
+			y: simpleShape.y ?? defaultSublimeCardShape.y ?? 0,
+			props: {
+				...defaultSublimeCardShape.props,
+				card: {
+					slug: simpleShape.cardId,
+					entityType: simpleShape.cardType,
+					textContent: simpleShape.cardText,
+				},
+			},
+			meta: {
+				...defaultSublimeCardShape.meta,
+				note: simpleShape.note,
+			},
+		} as ISublimeCardShape,
 	}
 }
 

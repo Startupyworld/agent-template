@@ -113,6 +113,27 @@ const SimpleUnknownShape = z
 
 export type SimpleUnknownShape = z.infer<typeof SimpleUnknownShape>
 
+const SimpleSublimeCardShape = z
+	.object({
+		// Required properties
+		_type: z.literal('sublime-card'),
+		note: z.string(),
+		shapeId: z.string(),
+
+		// Custom properties
+		cardId: z.string(),
+		cardType: z.string(),
+		cardText: z.string(),
+		x: z.number(),
+		y: z.number(),
+	})
+	.meta({
+		// Information about the shape to give to the agent
+		title: 'Sublime Card',
+		description: 'A card containing a piece of content that was saved to Sublime.',
+	})
+export type SimpleSublimeCardShape = z.infer<typeof SimpleSublimeCardShape>
+
 const SIMPLE_SHAPES = [
 	SimpleDrawShape,
 	SimpleGeoShape,
@@ -121,6 +142,7 @@ const SIMPLE_SHAPES = [
 	SimpleArrowShape,
 	SimpleNoteShape,
 	SimpleUnknownShape,
+	SimpleSublimeCardShape,
 ] as const
 export const SimpleShapeSchema = z.union(SIMPLE_SHAPES)
 
