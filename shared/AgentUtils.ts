@@ -62,7 +62,7 @@ export const PROMPT_PART_UTILS = [
 	ContextItemsPartUtil,
 
 	// Viewport
-	ScreenshotPartUtil,
+	// ScreenshotPartUtil,
 	ViewportBoundsPartUtil,
 
 	// Shapes

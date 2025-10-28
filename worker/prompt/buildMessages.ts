@@ -9,6 +9,7 @@ export function buildMessages(prompt: AgentPrompt): ModelMessage[] {
 
 	for (const part of Object.values(prompt)) {
 		const util = utils[part.type]
+		if (!util) continue
 		const messages = util.buildMessages(part)
 		allMessages.push(...messages)
 	}
